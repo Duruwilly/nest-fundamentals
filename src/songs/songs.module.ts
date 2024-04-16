@@ -4,6 +4,7 @@ import { SongsService } from './songs.service';
 import { connection } from 'src/common/constants/connection';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Song } from './song.entity';
+import { Artist } from 'src/artists/artist.entity';
 
 // const mockSongService = {
 //   findAll() {
@@ -12,7 +13,7 @@ import { Song } from './song.entity';
 // };
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Song])],
+  imports: [TypeOrmModule.forFeature([Song, Artist])],
   controllers: [SongsController],
   providers: [
     SongsService, // this allows us to inject the service into the controller because the controller is defining the module and the service is a provider in the module which allows the service to be injected

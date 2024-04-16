@@ -9,6 +9,7 @@ import {
   Pagination,
   paginate,
 } from 'nestjs-typeorm-paginate';
+import { Artist } from 'src/artists/artist.entity';
 
 @Injectable() // marks the class as a provider, making it eligible for dependency injection.
 export class SongsService {
@@ -17,6 +18,8 @@ export class SongsService {
     // It also allows you to access the repository methods provided by TypeORM, such as find(), save(), update(), and others
     @InjectRepository(Song)
     private songsRepository: Repository<Song>,
+    @InjectRepository(Artist)
+    private artistsRepository: Repository<Artist>,
   ) {}
   // private readonly songs = [];
 
@@ -29,6 +32,10 @@ export class SongsService {
     song.lyrics = songDto.lyrics;
     song.releasedDate = songDto.releasedDate;
 
+    // find all the artists based on the ida
+    const artists = await this.artistsRepository.findByIds(songDto.artists);
+    // set the relation with artist and songs
+    song.artists = artists;
     return await this.songsRepository.save(song);
   }
 

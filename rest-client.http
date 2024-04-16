@@ -11,11 +11,11 @@ POST http://localhost:3000/songs
 Content-Type: application/json
 
 {
-    "title": "woos",
-    "artists": ["olamide"],
+    "title": "u and i",
+    "artists": [1, 2],
     "releasedDate": "2024-09-30",
     "duration": "02:34",
-    "lyrics": "hello from the other world, I hope you are finee...."
+    "lyrics": "hello from the other world, I hope you are good...."
 }
 
 ### UPDATE SONG REQUEST
@@ -32,3 +32,15 @@ Content-Type: application/json
 
 ### DELETE SONG REQUEST
 DELETE http://localhost:3000/songs/7
+
+
+### CREATE USER
+POST http://localhost:3000/auth/signup
+Content-Type: application/json
+
+{
+    "firstName": "Princewill",
+    "lastName": "Duru",
+    "email": "princewillD@gmail.com",
+    "password": "123456"
+}
