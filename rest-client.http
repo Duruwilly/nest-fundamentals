@@ -44,3 +44,18 @@ Content-Type: application/json
     "email": "princewillD@gmail.com",
     "password": "123456"
 }
+
+### LOGIN USER
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "email": "princewillD@gmail.com",
+    "password": "123456"
+}
+
+## ACCESS TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByaW5jZXdpbGxEQGdtYWlsLmNvbSIsInN1YiI6MSwiaWF0IjoxNzEzMzQxMDkwLCJleHAiOjE3MTM0Mjc0OTB9.AjDpuGjTtohY_oZJG51SExFlej0q-VqGy4v22Ujc0mQ
+
+### PROFILE
+GET http://localhost:3000/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByaW5jZXdpbGxEQGdtYWlsLmNvbSIsInN1YiI6MSwiaWF0IjoxNzEzMzQ0MjE3LCJleHAiOjE3MTM0MzA2MTd9.nL20NtXRMT2KyT-E-vgPd8fqxEm-G_xg_JuBueu0B_U
