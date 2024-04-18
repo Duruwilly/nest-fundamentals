@@ -17,6 +17,7 @@ import { Users } from './users/user.entity';
 import { Artist } from './artists/artist.entity';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { ArtistsModule } from './artists/artists.module';
 
 // const devConfig = { port: 3000 };
 // const proConfig = { port: 4000 };
@@ -29,7 +30,7 @@ import { UsersModule } from './users/users.module';
       port: 5433,
       username: 'postgres',
       password: '123456',
-      database: 'spotify-clone-01',
+      database: 'spotify-clone-02',
       entities: [Song, Users, Artist],
       // autoLoadEntities: true,
       synchronize: true,
@@ -37,6 +38,7 @@ import { UsersModule } from './users/users.module';
     SongsModule,
     AuthModule,
     UsersModule,
+    ArtistsModule,
   ],
   controllers: [AppController],
   providers: [

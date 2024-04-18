@@ -6,35 +6,43 @@ import {
   Get,
   // HttpException,
   HttpStatus,
-  Inject,
+  // Inject,
   Param,
   ParseIntPipe,
   Post,
   Put,
   Query,
+  Req,
+  UseGuards,
 } from '@nestjs/common';
 import { SongsService } from './songs.service';
 import { CreateSongDTO } from './dto/create-song-dto';
-import { Connection } from 'src/common/constants/connection';
+// import { Connection } from 'src/common/constants/connection';
 import { Song } from './song.entity';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { UpdateSongDTO } from './dto/update-song-dto';
 import { Pagination } from 'nestjs-typeorm-paginate';
+import { ArtistJwtGuard } from 'src/auth/artists-jwt-guard';
 
 @Controller('songs')
 export class SongsController {
   constructor(
     // this is just how to inject an object as a provider and use it as a dependency
     private songService: SongsService,
-    @Inject('CONNECTION')
-    private connection: Connection,
-  ) {
-    console.log(this.connection);
-  }
+    // @Inject('CONNECTION')
+    // private connection: Connection,
+  ) {}
 
   @Post()
+  @UseGuards(ArtistJwtGuard)
   // The @Body() decorator indicates that the data for creating a new song will be provided in the request body while The createSongDTO parameter is of type CreateSongDTO, which is a DTO (Data Transfer Object) used for validating and transferring data when creating a new song
-  create(@Body() createSongDTO: CreateSongDTO): Promise<Song> {
+  create(
+    @Body() createSongDTO: CreateSongDTO,
+    @Req()
+    request,
+  ): Promise<Song> {
+    console.log('request user:', request.user);
+
     return this.songService.create(createSongDTO);
   }
 

@@ -9,10 +9,11 @@ GET http://localhost:3000/songs/2
 ### CREATE NEW SONG REQUEST
 POST http://localhost:3000/songs
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF5YkBnbWFpbC5jb20iLCJ1c2VySWQiOjIsImFydGlzdElkIjoxLCJpYXQiOjE3MTMzNzkwNTMsImV4cCI6MTcxMzQ2NTQ1M30.XwtDkQuK9Ch8Fa1M5orh-MXaPNpHc3T4ll67-NoNe_8
 
 {
     "title": "u and i",
-    "artists": [1, 2],
+    "artists": [1],
     "releasedDate": "2024-09-30",
     "duration": "02:34",
     "lyrics": "hello from the other world, I hope you are good...."
@@ -45,6 +46,26 @@ Content-Type: application/json
     "password": "123456"
 }
 
+### CREATE ARTIST
+POST http://localhost:3000/auth/signup
+Content-Type: application/json
+
+{
+    "firstName": "Ayo",
+    "lastName": "Balogun",
+    "email": "ayb@gmail.com",
+    "password": "123456"
+}
+
+### LOGIN ARTIST
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "email": "ayb@gmail.com",
+    "password": "123456"
+}
+
 ### LOGIN USER
 POST http://localhost:3000/auth/login
 Content-Type: application/json
@@ -54,8 +75,17 @@ Content-Type: application/json
     "password": "123456"
 }
 
+### UPDATE USER TO ARTIST
+POST http://localhost:3000/users/become-artist
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF5YkBnbWFpbC5jb20iLCJ1c2VySWQiOjIsImFydGlzdElkIjoxLCJpYXQiOjE3MTMzNjg3ODcsImV4cCI6MTcxMzQ1NTE4N30.4hgvNTxIknjpPq0bArGCYe6ATPJWuLO-iq-8vM5eE-4
+
+{}
+
 ## ACCESS TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByaW5jZXdpbGxEQGdtYWlsLmNvbSIsInN1YiI6MSwiaWF0IjoxNzEzMzQxMDkwLCJleHAiOjE3MTM0Mjc0OTB9.AjDpuGjTtohY_oZJG51SExFlej0q-VqGy4v22Ujc0mQ
+
+## ARTIST TOKEN TEMP: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF5YkBnbWFpbC5jb20iLCJ1c2VySWQiOjIsImlhdCI6MTcxMzM2NzIwOCwiZXhwIjoxNzEzNDUzNjA4fQ.WSUidXTA1zV6yjfiGYYfPZrgOpBQ38H-riOIc-7oC8k
 
 ### PROFILE
 GET http://localhost:3000/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByaW5jZXdpbGxEQGdtYWlsLmNvbSIsInN1YiI6MSwiaWF0IjoxNzEzMzQ0MjE3LCJleHAiOjE3MTM0MzA2MTd9.nL20NtXRMT2KyT-E-vgPd8fqxEm-G_xg_JuBueu0B_U
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF5YkBnbWFpbC5jb20iLCJ1c2VySWQiOjIsImFydGlzdElkIjoxLCJpYXQiOjE3MTMzNDc5OTAsImV4cCI6MTcxMzQzNDM5MH0.0WTKSfdYlD6tyHhG1XloWa4RgIh3JQRtDUYQzFx3Y7A

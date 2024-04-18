@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import { DeleteResult, In, Repository, UpdateResult } from 'typeorm';
 import { Song } from './song.entity';
 import { CreateSongDTO } from './dto/create-song-dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -33,7 +33,10 @@ export class SongsService {
     song.releasedDate = songDto.releasedDate;
 
     // find all the artists based on the ida
-    const artists = await this.artistsRepository.findByIds(songDto.artists);
+    // const artists = await this.artistsRepository.findByIds(songDto.artists); // findByIds has been deprecated
+    const artists = await this.artistsRepository.findBy({
+      id: In(songDto.artists),
+    });
     // set the relation with artist and songs
     song.artists = artists;
     return await this.songsRepository.save(song);
