@@ -5,7 +5,8 @@ import * as bcrypt from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
 import { Users } from 'src/users/user.entity';
 import { ArtistsService } from 'src/artists/artists.service';
-import { PayloadType } from './types';
+import { Enable2FAType, PayloadType } from './types';
+import * as speakeasy from 'speakeasy';
 
 @Injectable()
 export class AuthService {
@@ -46,7 +47,15 @@ export class AuthService {
       // return user;
       const payload: PayloadType = { email: user.email, userId: user.id };
       const artist = await this.artistsService.findArtist(user.id);
-      const { email, firstName, lastName, role } = user;
+      const {
+        email,
+        firstName,
+        lastName,
+        role,
+        twoFASecret,
+        enable2FA,
+        apiKey,
+      } = user;
 
       if (artist) {
         payload.artistId = artist.id;
@@ -58,10 +67,55 @@ export class AuthService {
           firstName,
           lastName,
           role,
+          twoFASecret,
+          enable2FA,
+          apiKey,
         },
       };
     } else {
       throw new UnauthorizedException('password does not match');
     }
+  }
+
+  async enable2FA(userId: number): Promise<Enable2FAType> {
+    const user = await this.userService.findById(userId);
+    if (user.enable2FA) {
+      return { secret: user.twoFASecret };
+    }
+    const secret = speakeasy.generateSecret();
+    console.log(secret);
+    user.twoFASecret = secret.base32;
+    await this.userService.updateSecretKey(user.id, user.twoFASecret);
+    return { secret: user.twoFASecret };
+  }
+
+  async validate2FAToken(
+    userId: number,
+    token: string,
+  ): Promise<{ verified: boolean }> {
+    try {
+      const user = await this.userService.findById(userId);
+
+      // extract his 2fa secret
+
+      // verify the secret with token by calling the speakeasy verify method
+      const verified = speakeasy.totp.verify({
+        secret: user.twoFASecret,
+        token: token,
+        encoding: 'base32',
+      });
+
+      if (verified) {
+        return { verified: true };
+      } else {
+        return { verified: false };
+      }
+    } catch (error) {
+      throw new UnauthorizedException('Error verifying token');
+    }
+  }
+
+  async validateUserByApiKey(apiKey: string): Promise<Users> {
+    return this.userService.findByApiKey(apiKey);
   }
 }

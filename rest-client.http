@@ -42,9 +42,11 @@ Content-Type: application/json
 {
     "firstName": "Princewill",
     "lastName": "Duru",
-    "email": "princewillD@gmail.com",
+    "email": "princewill1@gmail.com",
     "password": "123456"
 }
+
+## princewill 1 API KEY: TEMP f9d6395e-5c29-4076-adfd-2832bea8c91a
 
 ### CREATE ARTIST
 POST http://localhost:3000/auth/signup
@@ -89,3 +91,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF5YkBnb
 ### PROFILE
 GET http://localhost:3000/profile
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF5YkBnbWFpbC5jb20iLCJ1c2VySWQiOjIsImFydGlzdElkIjoxLCJpYXQiOjE3MTMzNDc5OTAsImV4cCI6MTcxMzQzNDM5MH0.0WTKSfdYlD6tyHhG1XloWa4RgIh3JQRtDUYQzFx3Y7A
+
+### ENABLE 2FA
+GET http://localhost:3000/auth/enable-2fa
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByaW5jZXdpbGxEQGdtYWlsLmNvbSIsInVzZXJJZCI6MSwiaWF0IjoxNzEzODY2MDE5LCJleHAiOjE3MTM5NTI0MTl9.Aof0EaAwiPSSBuo0eACX-ULgL0EUg_LtJ4Ye_Bnj0JQ
+
+### ACCESS PROFILE
+GET http://localhost:3000/auth/profile
+Authorization: Bearer f9d6395e-5c29-4076-adfd-2832bea8c91a

@@ -30,7 +30,7 @@ import { ArtistsModule } from './artists/artists.module';
       port: 5433,
       username: 'postgres',
       password: '123456',
-      database: 'spotify-clone-02',
+      database: 'spotify-clone-03',
       entities: [Song, Users, Artist],
       // autoLoadEntities: true,
       synchronize: true,

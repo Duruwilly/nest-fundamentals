@@ -6,6 +6,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { authConstants } from './auth-constant';
 import { JwtStrategy } from './jwt-strategy';
 import { ArtistsModule } from 'src/artists/artists.module';
+import { ApiKeyStrategy } from './api-key-strategy';
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import { ArtistsModule } from 'src/artists/artists.module';
     }),
     ArtistsModule,
   ],
-  providers: [AuthService, JwtStrategy],
+  providers: [AuthService, JwtStrategy, ApiKeyStrategy],
   controllers: [AuthController],
   exports: [AuthService], // this means, whereever I import the auth module, i could as well use the auth service inside of it
 })
