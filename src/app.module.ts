@@ -18,15 +18,22 @@ import { DataSource } from 'typeorm';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { ArtistsModule } from './artists/artists.module';
-import { dataSourceOptions } from '../db/data-source';
+import { typeOrmAsyncConfig } from '../db/data-source';
 import { SeedModule } from './seed/seed.module';
+import { ConfigModule } from '@nestjs/config';
+import configuration from './config/configuration';
 
 // const devConfig = { port: 3000 };
 // const proConfig = { port: 4000 };
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(dataSourceOptions),
+    ConfigModule.forRoot({
+      envFilePath: ['.env.production', '.env.development'],
+      isGlobal: true,
+      load: [configuration],
+    }),
+    TypeOrmModule.forRootAsync(typeOrmAsyncConfig),
     SongsModule,
     AuthModule,
     UsersModule,

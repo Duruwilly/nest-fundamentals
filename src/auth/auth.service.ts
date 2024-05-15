@@ -55,7 +55,6 @@ export class AuthService {
         twoFASecret,
         enable2FA,
         apiKey,
-        phone,
       } = user;
 
       if (artist) {
@@ -71,7 +70,6 @@ export class AuthService {
           twoFASecret,
           enable2FA,
           apiKey,
-          phone,
         },
       };
     } else {

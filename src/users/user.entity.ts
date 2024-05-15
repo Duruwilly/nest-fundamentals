@@ -30,7 +30,4 @@ export class Users {
 
   @Column()
   apiKey: string;
-
-  @Column()
-  phone: string;
 }
